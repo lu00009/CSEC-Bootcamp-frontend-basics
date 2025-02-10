@@ -1,4 +1,3 @@
-import React from 'react'
 import { CiBookmark } from "react-icons/ci";
 import { CiShare2 } from "react-icons/ci";
 import { IoBookmark } from "react-icons/io5";
@@ -26,7 +25,9 @@ const Job = (prop) => {
       <button>{prop.location}</button>
       <button>{prop.job_type}</button>
       <button>{prop.salary}</button>
-    </div></div>
+    </div>
+    <div>
+      <h5>{prop.description}</h5></div></div>
    
   </div>
   )

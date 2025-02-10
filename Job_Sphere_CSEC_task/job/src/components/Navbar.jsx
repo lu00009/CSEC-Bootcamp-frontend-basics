@@ -1,9 +1,8 @@
-import React from 'react'
 import logo from '../assets/jobsphere.svg'
 
 const Navbar = () => {
   return (
-      <div className='bg-[#FFFFFF] flex  w-full h-[75.28px] pt-[20px] pb-[10px] pr-[50px] pl-[50px] drop-shadow-[3px_2px_4px_rgba(0,0,0,0.25)] fixed'>
+      <div className='bg-[#FFFFFF] z-5 flex  w-full h-[75.28px] pt-[20px] pb-[10px] pr-[50px] pl-[50px] drop-shadow-[3px_2px_4px_rgba(0,0,0,0.25)] fixed justify-between'>
         <div className='bg-[#0034D1] w-[130px] h-[51px] rounded-[9.56px] p-[4.79px] left-7 '>
         <img src={logo}/>
         </div>

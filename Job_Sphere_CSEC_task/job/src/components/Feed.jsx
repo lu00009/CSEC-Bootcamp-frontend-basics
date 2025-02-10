@@ -1,4 +1,3 @@
-import React from "react";
 import Job from './job';
 
 
@@ -13,15 +12,16 @@ const Feed = (prop) => {
       {prop.jobs.map((job, index) => (
         <div key={index} className='drop-shadow-[3px_2px_4px_rgba(0,0,0,0.25)] rounded-[8px] border-[1px] border-[#000000] '>
           <Job 
-            img={job.img} 
+            img={job.logo} 
             title={job.title} 
             company={job.company}  
             location={job.location} 
-            job_type={job.job_type} 
+            job_type={job.type} 
             salary={job.salary} 
             isBookMarked={job.isBookMarked} 
             handleBookmark={()=>handleBookmark(job.id)}
             id={job.id}
+            description={job.description}
           />
         </div>
       ))}

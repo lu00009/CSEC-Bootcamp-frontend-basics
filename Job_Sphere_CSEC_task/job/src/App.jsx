@@ -1,66 +1,55 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from './components/Navbar'
-import Searchbar from './components/searchbar'
+import Searchbar from './components/Searchbar'
 import Feed from './components/feed'
 import Filter from './components/filter'
 import Savedjobs from './components/savedjobs'
-import logo1 from '../src/assets/pd.svg'
-import logo2 from '../src/assets/fd.svg'
-import logo3 from '../src/assets/dm.svg'
-import logo4 from '../src/assets/da.svg'
+import Pagination from "./components/Pagination";
+
 
 const App = () => {
-  const [jobs,setJobs] = useState([
-    {
-      img : logo1 ,
-      id : 1, 
-      title : "Product Design",
-      company : "Binford Ltd.",
-      job_type : "Full-time",
-      location :"Remote",
-      salary : "$200-$1,200",
-      isBookMarked : true
-    },
-    {
-      img : logo2 ,
-      id : 2, 
-      company : "Binford Ltd.",
-      job_type : "Full-time",
-      location :"Remote",
-      salary : "$200-$1,200",
-      title : "Fronted Developer",
-      isBookMarked : true
-    },
-    {
-      img : logo3,
-      id : 3,    
-      company : "Big Kahuna Burger Ltd.",
-      job_type : "Full-time",
-      location :"Remote",
-      salary : "$200-$1,200",
-      title : "Digital Marketing Specialist",
-      isBookMarked : false
-    },
-    {
-  
-      img : logo4 ,
-      id : 4, 
-      title : "Data Analyst",
-      company : "Acme Co.",
-      job_type : "Full-time",
-      location :"Remote",
-      salary : "$200-$1,200",
-      isBookMarked : false  
-    }
-  ])
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 5;
+  const [jobs,setJobs] = useState([])
+  useEffect(()=>{
+    try{
+    console.log("Fetching jobs for page:", currentPage);
+    const fetchjobs = async () =>{
+    const response = await fetch(`https://joblisting-rd8f.onrender.com/api/jobs?page=${currentPage}&limit=${totalPages}`)
+    // console.log('Response:', response); 
+    const data = await response.json();
+    console.log('Fetched Jobs for page', currentPage, data); // Log data for debugging
+
+   setJobs(data.jobs)
+   
+   }
+   fetchjobs()
+   console.log(currentPage)
+  }catch(error){
+    console.log(error)
+   }
+   
+  },[currentPage])
   return (
     <div>
      <div><Navbar/></div> 
      <div><Searchbar/></div>
           <div className='flex justify-between w-[100lvw] h-[430px] gap-5 top-[170px] relative pl-[100px] pr-[100px] '>
       <Filter/>
-        <Feed jobs={jobs} setJobs={setJobs}/>
+        <Feed 
+        jobs={jobs} 
+        setJobs={setJobs}
+        currentPage={currentPage}
+        />
         <Savedjobs jobs={jobs} setJobs={setJobs}/></div>
+        <div className="p-5">
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
+
+    </div>
       
       
       
