@@ -10,7 +10,7 @@ const Feed = (prop) => {
   return (
     <div className='flex flex-col gap-4 w-[54lvw] h-[200px]'>
       {prop.jobs.map((job, index) => (
-        <div key={index} className='drop-shadow-[3px_2px_4px_rgba(0,0,0,0.25)] rounded-[8px] border-[1px] border-[#000000] '>
+        <div key={index} className='rounded-[8px]  border-black bg-white drop-shadow-2xl'>
           <Job 
             img={job.logo} 
             title={job.title} 
@@ -22,6 +22,8 @@ const Feed = (prop) => {
             handleBookmark={()=>handleBookmark(job.id)}
             id={job.id}
             description={job.description}
+            currency={job.currency}
+            experienceLevel= {job.experienceLevel}
           />
         </div>
       ))}

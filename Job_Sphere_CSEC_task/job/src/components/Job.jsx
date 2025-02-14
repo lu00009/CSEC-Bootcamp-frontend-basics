@@ -26,6 +26,8 @@ const Job = (prop) => {
       <button>{prop.job_type}</button>
       <button>{prop.salary}</button>
     </div>
+    <div>{prop.experienceLevel}</div>
+    <div>{prop.currency}</div>
     <div>
       <h5>{prop.description}</h5></div></div>
    

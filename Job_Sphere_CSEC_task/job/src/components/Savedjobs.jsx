@@ -6,11 +6,11 @@ const Savedjobs = (prop) => {
   prop.setJobs(cancelJobs)}
   )
   return (
-    <div className='w-[350px] h-auto rounded-[8px] drop-shadow-[3px_2px_4px_rgba(0,0,0,0.25)] border-[1px] border-[#000000] flex flex-col items-center'>
+    <div className='w-[350px] h-auto rounded-[8px] flex flex-col items-center'>
       <h2 className='font-bold mb-4'>Saved Jobs</h2>
     {
-      prop.jobs.map((job,index)=>(job.isBookMarked && (<div key={index} className='w-[200px] h-[120px] rounded-[8px]  border-[1px] border-[#000000] p-2 flex flex-col pl-9 '>
-        <div className='flex gap-5'>
+      prop.jobs.map((job,index)=>(job.isBookMarked && (<div key={index} className='w-[200px] h-[120px] rounded-[8px]  border-black bg-white drop-shadow-2xl p-2 flex flex-col pl-9 '>
+        <div className='flex gap-5 '>
           <h3 className='font-bold '>{job.title}</h3> 
           <IoIosClose onClick={() => handleCancel(job.id)} />
             </div>

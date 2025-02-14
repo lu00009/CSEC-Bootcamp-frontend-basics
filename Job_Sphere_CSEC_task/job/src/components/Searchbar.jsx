@@ -48,7 +48,7 @@ const Searchbar = (prop) => {
       </div>
 
       {/* Search Button */}
-      <div className='w-[80px] h-[28px] rounded-[8px] pt-[2px] pr-[14px] pb-[10px] pl-[14px] gap-[4px] bg-[#0034D1] ml-4 mb-2'>
+      <div className='w-[80px] h-[28px] rounded-[8px] pt-[2px] pr-[14px] pb-[10px] pl-[14px] gap-[4px] bg-[#0034D1]'>
         <button
           className='font-[600] text-[17px] leading-[14px] text-[#FFFFFF]'
           aria-label='Search'
