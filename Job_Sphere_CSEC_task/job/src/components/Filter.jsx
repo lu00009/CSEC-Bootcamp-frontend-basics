@@ -11,18 +11,14 @@ const Filter = (prop) => {
     maxPercent,
     handleResetChange,
     handleSalaryChange,
-    handleSelectedChange,
-    setLocationInputValue
+    handleTypeChange,
+    setLocationInputValue,
+    handleLevelChange,
+    handleCurrencyChange,
+    selectedType,
+    selectedCurrency,
+    selectedLevel
   } = prop;
-
- 
-
-  // Filter jobs based on selected filters, location, and salary
-  
-
-  // Trigger filterJobs whenever dependencies change
-  
-
   return (
     <div className="pl-3.5 w-[30lvw] rounded-[8px] drop-shadow-[3px_2px_4px_rgba(0,0,0,0.25)] h-[700px] border-black bg-white">
       <h2 className="ml-10 font-bold text-[22px]">Filter</h2>
@@ -49,25 +45,30 @@ const Filter = (prop) => {
               type="checkbox"
               value="Full-Time"
               name="check-1"
-              onChange={handleSelectedChange}
+              checked={selectedType.includes("Full-Time")}
+              onChange={handleTypeChange}
             />
-            <label htmlFor="check-1">Full-Time</label>
+            <label htmlFor="check-1">Full Time</label>
           </ul>
           <ul>
             <input
               type="checkbox"
-              value="Part-time"
+              value="Hybrid"
               name="check-2"
-              onChange={handleSelectedChange}
+              onChange={handleTypeChange}
+              checked={selectedType.includes("Hybrid")}
+
             />
-            <label htmlFor="check-2">Part-time</label>
+            <label htmlFor="check-2">Hybrid</label>
           </ul>
           <ul>
             <input
               type="checkbox"
               value="Internship"
               name="check-3"
-              onChange={handleSelectedChange}
+              onChange={handleTypeChange}
+              checked={selectedType.includes("Internship")}
+
             />
             <label htmlFor="check-3">Internship</label>
           </ul>
@@ -76,7 +77,9 @@ const Filter = (prop) => {
               type="checkbox"
               value="Contract"
               id="check-4"
-              onChange={handleSelectedChange}
+              onChange={handleTypeChange}
+              checked={selectedType.includes("Contract")}
+
             />
             <label htmlFor="check-4">Contract</label>
           </ul>
@@ -85,7 +88,9 @@ const Filter = (prop) => {
               type="checkbox"
               value="Volunteer"
               name="check-5"
-              onChange={handleSelectedChange}
+              onChange={handleTypeChange}
+              checked={selectedType.includes("Volunteer")}
+
             />
             <label htmlFor="check-5">Volunteer</label>
           </ul>
@@ -112,10 +117,14 @@ const Filter = (prop) => {
           <select
             name=""
             id="levels"
-            onChange={handleSelectedChange}
+            value={selectedLevel}
+            onChange={handleLevelChange}
             className="mb-3  border-[1px] border-black w-[213px]"
           >
-            <option value="Entry Level" id="entry">
+            <option value='' id="all">
+              All
+            </option>
+            <option value='Entry Level' id="entry">
               Entry Level
             </option>
 
@@ -181,13 +190,13 @@ const Filter = (prop) => {
             <h4>From</h4>
             <input type="text"               
             onChange={(e) => handleSalaryChange(e, "min")}
-            className="w-[20px] border-[1px] border-black" />
+            className="w-[40px] border-[1px] border-black" />
           </div>
           <div className="flex">
             <h4>To</h4>
             <input type="text" 
                    onChange={(e) => handleSalaryChange(e, "max")}
-                   className="w-[20px] border-[1px] border-black" />
+                   className="w-[40px] border-[1px] border-black" />
           </div>
         </div>
       </div>
@@ -197,9 +206,11 @@ const Filter = (prop) => {
           <select
             name=""
             id="currency"
-            onChange={handleSelectedChange}
+            onChange={handleCurrencyChange}
             className="mb-3 border-[1px] border-black w-[213px]"
+            value={selectedCurrency}
           >
+            <option value="">All</option>
             <option value="USD">USD</option>
             <option value="ETB">ETB</option>
           </select>

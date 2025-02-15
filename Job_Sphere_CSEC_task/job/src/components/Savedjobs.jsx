@@ -1,30 +1,46 @@
 import { IoIosClose } from "react-icons/io";
 
-const Savedjobs = (prop) => {
-  const handleCancel = ((id)=>{
-  const cancelJobs = prop.jobs.map((obj)=>obj.id === id ? {...obj,isBookMarked : !obj.isBookMarked} : obj)
-  prop.setJobs(cancelJobs)}
-  )
+const Savedjobs = ({ jobs, setJobs }) => {
+  const handleCancel = (id) => {
+    const updatedJobs = jobs.map((job) =>
+      job.id === id ? { ...job, isBookMarked: !job.isBookMarked } : job
+    );
+    setJobs(updatedJobs);
+  };
+
   return (
-    <div className='w-[350px] h-auto rounded-[8px] flex flex-col items-center'>
-      <h2 className='font-bold mb-4'>Saved Jobs</h2>
-    {
-      prop.jobs.map((job,index)=>(job.isBookMarked && (<div key={index} className='w-[200px] h-[120px] rounded-[8px]  border-black bg-white drop-shadow-2xl p-2 flex flex-col pl-9 '>
-        <div className='flex gap-5 '>
-          <h3 className='font-bold '>{job.title}</h3> 
-          <IoIosClose onClick={() => handleCancel(job.id)} />
-            </div>
-        <div>Google</div>
-        <div className='flex gap-2'>
-          <h4>Remote</h4>
-          <h4>$200</h4>
-        </div>
-      </div>)
-  ))}  </div>
-
-
+    <div className='w-[280px] rounded-[8px] p-4 '>
+      <h2 className='font-bold mb-4 text-lg text-gray-800 ml-8'>Saved Jobs</h2>
+      <div className='flex flex-col gap-4'>
+        {jobs.map(
+          (job, index) =>
+            job.isBookMarked && (
+              <div
+                key={index}
+                className='w-full h-[150px] p-4 rounded-lg border border-gray-300 shadow-md flex flex-col gap-3'
+              >
+                <div className='flex justify-between items-center'>
+                  <h3 className='font-bold text-gray-700'>{job.title}</h3>
+                  <IoIosClose
+                    className='text-gray-600 cursor-pointer hover:text-red-500 text-xl'
+                    onClick={() => handleCancel(job.id)}
+                  />
+                </div>
+                <div className='text-gray-600'>{job.company}</div>
+                <div className='flex gap-2'>
+                  <span className='px-2 py-1 rounded-md bg-gray-200 text-[14px] text-gray-700'>
+                    {job.type}
+                  </span>
+                  <span className='px-2 py-1 rounded-md bg-gray-200 text-[14px] text-gray-700'>
+                    {job.salary}
+                  </span>
+                </div>
+              </div>
+            )
+        )}
+      </div>
+    </div>
   );
-
 };
 
 export default Savedjobs;
