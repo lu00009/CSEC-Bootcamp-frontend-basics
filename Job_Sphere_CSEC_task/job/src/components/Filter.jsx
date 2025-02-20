@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 
 const Filter = (prop) => {

@@ -1,6 +1,7 @@
 import { IoIosClose } from "react-icons/io";
 
-const Savedjobs = ({ jobs, setJobs }) => {
+const Savedjobs = (props) => {
+  const { jobs, setJobs } = props
   const handleCancel = (id) => {
     const updatedJobs = jobs.map((job) =>
       job.id === id ? { ...job, isBookMarked: !job.isBookMarked } : job

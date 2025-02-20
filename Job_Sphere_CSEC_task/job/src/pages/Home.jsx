@@ -1,25 +1,20 @@
-import { useEffect, useState, useDeferredValue, useMemo } from "react";
+import { useEffect, useState } from "react";
 import Feed from "../components/feed";
 import Filter from "../components/filter";
 import Savedjobs from "../components/savedjobs";
 import Pagination from "../components/Pagination";
-import Navbar from "../components/Navbar";
-import Searchbar from "../components/Searchbar";
+import PropTypes from 'prop-types' 
 
-const Home = () => {
+const Home = (props) => {
+  const { jobs,setJobs, currentPage, setCurrentPage } = props;
   const [minValue, setMinValue] = useState(80000);
   const [maxValue, setMaxValue] = useState(200000);
-  const [query, setQuery] = useState("");
-  const deferredQuery = useDeferredValue(query);
-  const [jobs, setJobs] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState(jobs);
   const [locationInputValue, setLocationInputValue] = useState("");
   const [selectedLevel, setSelectedLevel] = useState("");
   const [selectedCurrency, setSelectedCurrency] = useState("");
   const [selectedType, setSelectedType] = useState([]);
-  
 
   const totalPages = 5;
   const minLimit = 80000;
@@ -35,7 +30,7 @@ const Home = () => {
           `https://joblisting-rd8f.onrender.com/api/jobs?page=${currentPage}&limit=10`
         );
         const data = await response.json();
-        setJobs(data.jobs);
+        console.log("fetched initially", data.jobs);
         setFilteredJobs(data.jobs); // Initialize filteredJobs with fetched jobs
       } catch (error) {
         console.error("Error fetching jobs:", error);
@@ -45,13 +40,6 @@ const Home = () => {
     fetchJobs();
   }, [currentPage]);
 
-  // Filter jobs based on search query
-  const filteredQuery = useMemo(() => {
-    return jobs.filter((job) =>
-      job.title.toLowerCase().includes(deferredQuery.toLowerCase())
-    );
-  }, [deferredQuery, jobs]);
-
   // Filter jobs based on selected filters, location, and salary
   useEffect(() => {
     const filterJobs = () => {
@@ -59,20 +47,26 @@ const Home = () => {
 
       // Filter by experience level
       if (selectedLevel) {
-        filtered = filtered.filter((job) => job.experienceLevel === selectedLevel);
+        filtered = filtered.filter(
+          (job) => job.experienceLevel === selectedLevel
+        );
       }
 
       // Filter by currency
       if (selectedCurrency) {
         filtered = filtered.filter((job) => job.currency === selectedCurrency);
       }
-      console.log('selectedcurrency',selectedCurrency,'filtered salary',filtered)
+      console.log(
+        "selectedcurrency",
+        selectedCurrency,
+        "filtered salary",
+        filtered
+      );
 
       // Filter by job type
       if (selectedType.length > 0) {
         filtered = filtered.filter((job) => selectedType.includes(job.type));
       }
-      
 
       // Filter by location
       if (locationInputValue) {
@@ -86,7 +80,15 @@ const Home = () => {
     };
 
     filterJobs();
-  }, [selectedLevel, selectedCurrency, selectedType, locationInputValue, minValue, maxValue, jobs]);
+  }, [
+    selectedLevel,
+    selectedCurrency,
+    selectedType,
+    locationInputValue,
+    minValue,
+    maxValue,
+    jobs,
+  ]);
 
   // Filter jobs by location
   const filterJobsByLocation = (locationInputValue, jobs) => {
@@ -112,42 +114,39 @@ const Home = () => {
   // Handle currency change
   const handleCurrencyChange = (event) => {
     setSelectedCurrency(event.target.value);
-    console.log('curr',selectedCurrency)
+    console.log("curr", selectedCurrency);
   };
 
   // Handle level change
   const handleLevelChange = (event) => {
     setSelectedLevel(event.target.value);
-    
   };
 
   // Handle type change
   const handleTypeChange = (event) => {
-    const value = event.target.value
+    const value = event.target.value;
     setSelectedType((prevSelected) => {
       if (prevSelected.includes(value)) {
-        console.log('Removing:', value);
+        console.log("Removing:", value);
         return prevSelected.filter((type) => type !== value);
       } else {
-        console.log('Adding:', value);
+        console.log("Adding:", value);
         return [...prevSelected, value];
       }
     });
   };
-    
 
   // Handle salary change
   const handleSalaryChange = (event, type) => {
     const value = Number(event.target.value);
-    if(value<=maxLimit && value>=minLimit){
+    if (value <= maxLimit && value >= minLimit) {
       if (type === "min" && value < maxValue) {
         setMinValue(value);
       } else if (type === "max" && value > minValue) {
         setMaxValue(value);
       }
     }
-    console.log('max',maxValue,'min',minValue)
-    
+    console.log("max", maxValue, "min", minValue);
   };
 
   // Handle reset button
@@ -164,24 +163,13 @@ const Home = () => {
 
   return (
     <>
-      <div>
-        <Navbar />
-      </div>
-      <div>
-        <Searchbar
-          query={query}
-          setQuery={setQuery}
-          filteredQuery={filteredQuery}
-          deferredQuery={deferredQuery}
-        />
-      </div>
       <div className="flex justify-between drop-shadow-[3px_2px_4px_rgba(0,0,0,0.25)] w-[100lvw] h-[430px] gap-5 top-[170px] relative pl-[100px] pr-[100px] ">
         <Filter
           // key={JSON.stringify({ minValue, maxValue, selectedFilters, selectedLevel, selectedCurrency, selectedType })}
           jobs={jobs}
           minValue={minValue}
           minLimit={minLimit}
-          maxValue={maxValue} 
+          maxValue={maxValue}
           maxLimit={maxLimit}
           minPercent={minPercent}
           maxPercent={maxPercent}
@@ -210,5 +198,10 @@ const Home = () => {
     </>
   );
 };
-
+Home.propTypes = {
+  jobs: PropTypes.array.isRequired,
+  setJobs: PropTypes.func.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  setCurrentPage: PropTypes.func.isRequired,
+};
 export default Home;

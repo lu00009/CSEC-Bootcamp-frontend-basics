@@ -1,8 +1,9 @@
 import { CiBookmark } from "react-icons/ci";
 import { CiShare2 } from "react-icons/ci";
 import { IoBookmark } from "react-icons/io5";
-
+import { useNavigate } from 'react-router-dom';
 const Job = (prop) => {
+  const navigate = useNavigate()
   return (
     <div className="  flex gap-2 p-2.5 ">
       <div className="w-[53px] h-[153px]">
@@ -13,7 +14,7 @@ const Job = (prop) => {
         {" "}
         <div className="flex justify-between w-[400px] mt-3">
           <div className="font-[600] text-[28px] leading-[38px] Inter">
-            <h2>{prop.title}</h2>
+            <h2 onClick={()=>navigate(`jobs/${prop.id}`)}>{prop.title}</h2>
           </div>
           <div className="flex">
             <div>
