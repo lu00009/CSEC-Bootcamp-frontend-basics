@@ -2,10 +2,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect, useMemo, useDeferredValue } from "react";
 import Home from "./pages/Home";
 import Login from "./pages/login";
-import Signup from "./pages/Signup";
 import Jobdescription from "./pages/Jobdescription";
 import Navbar from "./components/Navbar";
 import Searchbar from "./components/Searchbar";
+import Signup from "./pages/Signup";
 
 const App = () => {
   const [query, setQuery] = useState("");
@@ -39,25 +39,28 @@ const App = () => {
   return (
     <div>
       <div>
-        <Navbar />
+        <BrowserRouter>
+        <div>
+        {location.pathname !== "/signup" && location.pathname !== '/login' &&( <Navbar />)}
+
       </div>
       <div>
+        
+      {location.pathname !== "/signup"&& location.pathname !== '/login' && (
         <Searchbar
           query={query}
           setQuery={setQuery}
           filteredQuery={filteredQuery}
           deferredQuery={deferredQuery}
-        />
+        />)}
       </div>
-      <div>
-        <BrowserRouter>
           <Routes>
             <Route index element={<Home jobs={jobs} 
                setJobs={setJobs} 
                currentPage={currentPage} 
                setCurrentPage={setCurrentPage}  />} />
             <Route path="/Login" element={<Login />} />
-            <Route path="/Signup" element={<Signup />} />
+            <Route path="/signup" element={<Signup/>}/>
             <Route path="/jobs/:id" element={<Jobdescription />} />
           </Routes>
         </BrowserRouter>

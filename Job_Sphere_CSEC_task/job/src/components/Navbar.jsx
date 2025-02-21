@@ -1,4 +1,5 @@
 import logo from '../assets/jobsphere.svg'
+import { Link } from 'react-router-dom'
 
 const Navbar = () => {
   return (
@@ -13,10 +14,14 @@ const Navbar = () => {
           <div className='w-[107px] h-[24px] p-[10px] gap-[4px] font-[400] text-[17px] leading-[24.2px] '>Contact Us</div>
         </div>
         <div className='flex w-[300px] h-[48px] gap-[24px]'>
-          <div className=' bg-[#0034D1] w-[100px] h-[38px] pt-[5px] pr-[37px] pb-[10px] pl-[20px] rounded-[8px]' ><button className='w-[53px] h-[16px] font-[600] text-[17px] leading-[16px] OpenSans text-[#FFFFFF]'>Login</button> </div>
+        
+       <Link to='/login'> <div className=' bg-[#0034D1] w-[100px] h-[38px] pt-[5px] pr-[37px] pb-[10px] pl-[20px] rounded-[8px]' ><button className='w-[53px] h-[16px] font-[600] text-[17px] leading-[16px] OpenSans text-[#FFFFFF]'>Login</button> </div>
+       </Link>
+         <Link to='/signup'>
           <div className='w-[110px] h-[38px] pt-[5px] pr-[37px] pb-[10px] pl-[20px] rounded-[8px] border-[1px] border-[#0034D1]'><button className='w-[65px] h-[16px] font-[600] text-[17px] leading-[16px] OpenSans text-[#2F2F2F]'>Sign In</button></div>
-          
+          </Link>
         </div>
+       
       </div>
     
   )

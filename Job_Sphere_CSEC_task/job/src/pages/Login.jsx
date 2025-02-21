@@ -1,6 +1,6 @@
-import React from "react";
 import logo from "../assets/jobsearch.svg";
 import logo2 from "../assets/jobsphere.svg";
+import { Link } from "react-router-dom";
 const Login = () => {
   return (
     <div className="flex gap-18">
@@ -40,8 +40,9 @@ const Login = () => {
         <img src="" alt="" />
         <img src="" alt="" />
       </div>
-      <div className="flex mt-6"><h4 className="font-bold">Don't have an account?</h4>
-      <a href="">Create account</a></div>
+      <div className="flex mt-6"><h4 className="font-bold">Donot have an account?</h4>
+      <Link to='/signup'><a href="/signup">Create account</a></Link>
+      </div>
       
     </div>
     </div>
