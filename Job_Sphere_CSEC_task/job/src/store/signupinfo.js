@@ -21,8 +21,7 @@ export const initialState = {
 };
 
 export const actions = (set) => ({
-	setPersonalInformation: (info) =>
-		set((state) => ({ ...state, personalInformation: info })),
+	setPersonalInformation: (info) =>set((state) => ({ ...state, personalInformation: info })),
 
 	setHandleInformation: (info) =>
 		set((state) => ({ ...state, handleInformation: info })),

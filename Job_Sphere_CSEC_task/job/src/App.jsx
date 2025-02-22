@@ -6,6 +6,7 @@ import Jobdescription from "./pages/Jobdescription";
 import Navbar from "./components/Navbar";
 import Searchbar from "./components/Searchbar";
 import Signup from "./pages/Signup";
+import Posted from "./pages/Posted";
 
 const App = () => {
   const [query, setQuery] = useState("");
@@ -61,6 +62,8 @@ const App = () => {
                setCurrentPage={setCurrentPage}  />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/signup" element={<Signup/>}/>
+            <Route path="/Posted" element={<Posted/>}/>
+
             <Route path="/jobs/:id" element={<Jobdescription />} />
           </Routes>
         </BrowserRouter>
