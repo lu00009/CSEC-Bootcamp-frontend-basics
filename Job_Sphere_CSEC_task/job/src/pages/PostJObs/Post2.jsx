@@ -3,7 +3,7 @@ import { post2Validation } from './validation'
 import { useFormik } from 'formik'
 import { useStepperPost } from '../../store/stepperPost'
 const Post2 = () => {
-  const {setPost2}= usePost()
+  const {setJobData}= usePost()
   const {next , back} = useStepperPost()
 
   const formik = useFormik({
@@ -19,7 +19,7 @@ const Post2 = () => {
     onSubmit : values =>{
       console.log(formik.errors);
       console.log(values, 'values')
-      setPost2(values)
+      setJobData(values)
       console.log(values);
       
     next()
@@ -40,7 +40,7 @@ const Post2 = () => {
 
     <div  className="mt-6 w-[320px] h-[30px] border-[1px] rounded-[6px] outline-none p-0.5">
       {" "}
-      <input type="link" placeholder="logo" className="pl-1" id="logo" name="logo" {...formik.getFieldProps('logo')} />
+      <input type="url" placeholder='logo' className="pl-1" id="logo" name="logo" {...formik.getFieldProps('logo')} />
     </div>
           {formik.touched.logo && formik.errors.logo ? (<div className='text-red-600'>{formik.errors.logo}</div>):null}
 
@@ -70,7 +70,7 @@ const Post2 = () => {
 
     <div className="w-[320px] h-[30px] rounded-[8px] pt-[4px] pr-[14px] pb-[25px] pl-[100px] gap-[4px] bg-[#0034D1]  mt-6 ">
       <button className="text-white top-[6px] left-[47px] font-[500] text-[18px] leading-[21.78px]" type="submit"
-      >Submit</button>
+      >Continue</button>
        
     </div>
     <div className="w-[320px] h-[30px] rounded-[8px] pt-[4px] pr-[14px] pb-[25px] pl-[100px] gap-[4px] bg-[#0034D1]  mt-6 ">

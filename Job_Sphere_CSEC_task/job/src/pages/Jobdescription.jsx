@@ -14,7 +14,7 @@ const JobDescription = () => {
       try {
         console.log("Fetching job for ID:", id);
         const response = await fetch(
-          `https://joblisting-rd8f.onrender.com/api/jobs/${id}`
+          `https://joblisting-3hjv.onrender.com/api/jobs/${id}`
         );
 
         if (!response.ok) {

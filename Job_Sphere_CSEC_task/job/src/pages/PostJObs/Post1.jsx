@@ -4,8 +4,8 @@ import { post1Validation } from "./validation";
 import { useStepperPost } from "../../store/stepperPost"
 
 const Post1 = () => {
-  const {post1, setPost1} = usePost()
-  const {next, back} = useStepperPost()
+  const {setJobData} = usePost()
+  const {next} = useStepperPost()
   console.log("next function:", next);
 
 const formik = useFormik({
@@ -19,7 +19,7 @@ const formik = useFormik({
     console.log(formik.errors);
     console.log(values, 'values')
     
-    setPost1(values)
+    setJobData(values)
     console.log('next......')
     next()
     console.log("Updated step:", useStepperPost.getState().count);  // Check if it increments
@@ -65,9 +65,9 @@ const formik = useFormik({
       </div>
 
     </div>
-    <div className="w-[500px] h-[150 px] rounded-[9.56px] p-[4.79px]  ">
+    {/* <div className="w-[500px] h-[150 px] rounded-[9.56px] p-[4.79px]  ">
           <img src='' className="" />
-        </div>
+        </div> */}
     </div>
     </form>
    

@@ -27,7 +27,7 @@ const Home = (props) => {
     const fetchJobs = async () => {
       try {
         const response = await fetch(
-          `https://joblisting-rd8f.onrender.com/api/jobs?page=${currentPage}&limit=10`
+          `https://joblisting-3hjv.onrender.com/api/jobs?page=${currentPage}?limit=10`
         );
         const data = await response.json();
         console.log("fetched initially", data.jobs);

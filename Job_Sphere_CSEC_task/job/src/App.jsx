@@ -42,12 +42,12 @@ const App = () => {
       <div>
         <BrowserRouter>
         <div>
-        {location.pathname !== "/signup" && location.pathname !== '/login' &&( <Navbar />)}
+        {location.pathname !== "/signup" && location.pathname !== '/login' && ( <Navbar />)}
 
       </div>
       <div>
         
-      {location.pathname !== "/signup"&& location.pathname !== '/login' && (
+      {location.pathname !== "/signup"&& location.pathname !== '/login' &&  location.pathname !== '/Posted' && (
         <Searchbar
           query={query}
           setQuery={setQuery}
@@ -63,7 +63,6 @@ const App = () => {
             <Route path="/Login" element={<Login />} />
             <Route path="/signup" element={<Signup/>}/>
             <Route path="/Posted" element={<Posted/>}/>
-
             <Route path="/jobs/:id" element={<Jobdescription />} />
           </Routes>
         </BrowserRouter>
