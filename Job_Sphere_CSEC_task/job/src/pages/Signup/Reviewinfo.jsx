@@ -1,5 +1,5 @@
-import { useSignupInfo } from "../../store/signupinfo";
-import { useStepper } from "../../store/stepper";
+import { useSignupInfo } from "../../stores/signupinfo";
+import { useStepper } from "../../stores/stepper";
 
 export const Reviewinfo = () => {
   const { back } = useStepper();

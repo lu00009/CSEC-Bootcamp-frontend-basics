@@ -4,8 +4,12 @@ import Filter from "../components/filter";
 import Savedjobs from "../components/savedjobs";
 import Pagination from "../components/Pagination";
 import PropTypes from 'prop-types' 
+import { useDispatch } from "react-redux";
+import { fetchJobs } from "../features/JobdataSlice";
 
 const Home = (props) => {
+const dispatch = useDispatch();
+
   const { jobs,setJobs, currentPage, setCurrentPage } = props;
   const [minValue, setMinValue] = useState(80000);
   const [maxValue, setMaxValue] = useState(200000);
@@ -24,21 +28,16 @@ const Home = (props) => {
 
   // Fetch jobs from the API
   useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const response = await fetch(
-          `https://joblisting-3hjv.onrender.com/api/jobs?page=${currentPage}?limit=10`
-        );
-        const data = await response.json();
-        console.log("fetched initially", data.jobs);
-        setFilteredJobs(data.jobs); // Initialize filteredJobs with fetched jobs
-      } catch (error) {
-        console.error("Error fetching jobs:", error);
-      }
-    };
-
-    fetchJobs();
-  }, [currentPage]);
+    dispatch(fetchJobs())
+      .unwrap()
+      .then((data) => {
+        console.log("Jobs fetched successfully:", data);
+        setFilteredJobs(data.jobs)
+      })
+      .catch((error) => {
+        console.error("Failed to fetch jobs:", error);
+      });
+  }, [dispatch]);
 
   // Filter jobs based on selected filters, location, and salary
   useEffect(() => {

@@ -2,8 +2,8 @@ import logo2 from "../../assets/signup.svg";
 import logo from '../../assets/jobsphere.svg'
 import {useFormik} from 'formik'
 import { handleInfoValidation } from "./signup.validation";
-import { useStepper } from "../../store/stepper";
-import { useSignupInfo } from "../../store/signupinfo";
+import { useStepper } from "../../stores/stepper";
+import { useSignupInfo } from "../../stores/signupinfo";
 const Handleinfo = () => {
   const {setHandleInformation} = useSignupInfo()
   const {next, back} = useStepper()

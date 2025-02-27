@@ -9,8 +9,8 @@ export const post1Validation = yup.object({
 export const post2Validation = yup.object({
   company: yup.string().required("enter company name"),
   logo: yup.string().required("enter the logo url"),
-  isBookmarked: yup.bool().required("isBookmarked"),
+  isBookMarked: yup.bool().required("isBookmarked"),
   location: yup.string().required("enter the location"),
-  experiancelevel: yup.string().required("enter the experiance level"),
+  experienceLevel: yup.string().required("enter the experiance level"),
   currency: yup.string().required("enter the currency"),
 });

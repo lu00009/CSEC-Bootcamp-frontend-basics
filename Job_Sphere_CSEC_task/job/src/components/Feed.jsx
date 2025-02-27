@@ -1,12 +1,13 @@
+import { useDispatch } from 'react-redux';
 import Job from './job';
+import { toggleBookmark } from '../features/JobdataSlice';
 
 
 const Feed = (prop) => {
- 
+ const dispatch = useDispatch();
 
   const handleBookmark = (id)=>{
-    const updatedJobs = prop.jobs.map((obj)=>obj.id === id ? {...obj,isBookMarked : !obj.isBookMarked} : obj)
-    prop.setJobs(updatedJobs)
+    dispatch(toggleBookmark(id))
      }
   return (
     <div className='flex flex-col gap-4 w-[54lvw] h-[200px]'>

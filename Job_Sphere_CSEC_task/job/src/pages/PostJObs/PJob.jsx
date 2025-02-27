@@ -1,17 +1,32 @@
-import { usePost } from "../../store/post";
-import { useStepperPost } from "../../store/stepperPost";
+import { useStepperPost } from "../../stores/stepperPost";
 import { CiBookmark } from "react-icons/ci";
 import { CiShare2 } from "react-icons/ci";
 import { IoBookmark } from "react-icons/io5";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { postJob } from "../../features/JobdataSlice";
 
 export const PJob = () => {
   const { back } = useStepperPost();
-const {jobData, postJob} = usePost()
-const handleSubmit = async () => {
-  await postJob(jobData); // Post the job to the backend
-  alert("Job posted successfully!"); // Optional confirmation
-  back(); // Navigate back after posting
-};
+  const dispatch = useDispatch();
+  const jobData = useSelector((state) => state.post);
+  console.log("jobData:", jobData.jobData);
+  if (!jobData || Object.keys(jobData).length === 0) {
+    return <div>Loading...</div>;
+  }
+
+
+  function handleSubmit() {
+    console.log("Submitted");
+   try{
+    dispatch(postJob(jobData.jobData));
+    console.log("job is posted");
+    back();
+  } catch (error) {
+    console.error("Error posting job:", error);
+   } 
+  }
+
   return ( 
     <div className="max-w-[700px] p-4 border border-gray-200 rounded-lg shadow-lg bg-white">
       {/* Job Header */}

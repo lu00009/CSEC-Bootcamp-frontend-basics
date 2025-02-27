@@ -1,25 +1,27 @@
-import { usePost} from '../../store/post'
 import { post2Validation } from './validation'
 import { useFormik } from 'formik'
-import { useStepperPost } from '../../store/stepperPost'
+import { useStepperPost } from '../../stores/stepperPost'
+import { setJobData } from "../../features/JobdataSlice";
+import { useDispatch } from "react-redux";
 const Post2 = () => {
-  const {setJobData}= usePost()
+  const dispatch = useDispatch()
+
   const {next , back} = useStepperPost()
 
   const formik = useFormik({
     initialValues:{
       company : '',
       logo : '',
-      isBookmarked :'',
+      isBookMarked :false,
       location : '',
-      experiancelevel : '',
+      experienceLevel : '',
       currency: ''
 
     }, validationSchema : post2Validation,
     onSubmit : values =>{
       console.log(formik.errors);
       console.log(values, 'values')
-      setJobData(values)
+      dispatch(setJobData(values))
       console.log(values);
       
     next()
@@ -44,11 +46,19 @@ const Post2 = () => {
     </div>
           {formik.touched.logo && formik.errors.logo ? (<div className='text-red-600'>{formik.errors.logo}</div>):null}
 
-    <div  className="mt-6 w-[320px] h-[30px] border-[1px] rounded-[6px] outline-none p-0.5">
-      {" "}
-      <input type="text" placeholder="isBookmarked" className="pl-1" id="isBookmarked" name="isBookmarked" {...formik.getFieldProps('isBookmarked')} />
-    </div>
-          {formik.touched.isBookmarked && formik.errors.isBookmarked? (<div className='text-red-600'>{formik.errors.isBookmarked}</div>):null}
+          <div className="mt-6 w-[320px] h-[30px] border-[1px] rounded-[6px] outline-none p-0.5">
+          <select
+            className="pl-1"
+            id="isBookMarked"
+            name="isBookMarked"
+            value={formik.values.isBookMarked}
+            onChange={(e) => formik.setFieldValue("isBookMarked", e.target.value === "true")}
+          >
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </select>
+        </div>
+          {formik.touched.isBookMarked && formik.errors.isBookMarked? (<div className='text-red-600'>{formik.errors.isBookMarked}</div>):null}
 
     <div  className="mt-6 w-[320px] h-[30px] border-[1px] rounded-[6px] outline-none p-0.5">
       {" "}
@@ -58,9 +68,9 @@ const Post2 = () => {
 
     <div  className="mt-6 w-[320px] h-[30px] border-[1px] rounded-[6px] outline-none p-0.5">
     {" "}
-    <input type="text" placeholder="experiance-level" className="pl-1" id="experiancelevel" name="experiancelevel" {...formik.getFieldProps('experiancelevel')}/>
+    <input type="text" placeholder="experiance-level" className="pl-1" id="experienceLevel" name="experienceLevel" {...formik.getFieldProps('experienceLevel')}/>
   </div>
-        {formik.touched.experiancelevel && formik.errors.experiancelevel ? (<div className='text-red-600'>{formik.errors.experiancelevel}</div>):null}
+        {formik.touched.experienceLevel && formik.errors.experienceLevel ? (<div className='text-red-600'>{formik.errors.experienceLevel}</div>):null}
 
   <div  className="mt-6 w-[320px] h-[30px] border-[1px] rounded-[6px] outline-none p-0.5">
   {" "}

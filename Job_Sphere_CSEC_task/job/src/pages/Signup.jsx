@@ -1,4 +1,4 @@
-import { useStepper } from "../store/stepper";
+import { useStepper } from "../stores/stepper";
 import Personalinfo from "./Signup/Personalinfo";
 import Handleinfo from "./Signup/Handlesinfo";
 import Credentialinfo from "./Signup/Credentialinfo";

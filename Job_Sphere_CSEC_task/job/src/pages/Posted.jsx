@@ -1,4 +1,4 @@
-import { useStepperPost } from "../store/stepperPost";
+import { useStepperPost } from "../stores/stepperPost";
 import { PJob } from "./PostJObs/pJob";
 import Post1 from ".//PostJObs/Post1";
 import Post2 from "./PostJObs/Post2";
